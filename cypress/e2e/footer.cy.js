@@ -67,8 +67,5 @@ describe('headerMob', () => {
         cy.get('footer').find('a[href="/krasnodar/adverts/rent/living/ot_cottage#adverts"]').contains('Дома').click()
         cy.url().should('include', '/adverts/rent/living/ot_cottage#adverts')
 
-
-
-
     })
 })
