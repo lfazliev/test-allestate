@@ -7,7 +7,6 @@ describe('mainPage', () => {
         cy.get("div.mortgageSection").contains('жилого дома').click()
         cy.url().should('include', '/mortgage/programs/secondary')
         cy.go('back')
-
         cy.get("div.mortgageSection").contains('Под залог').click()
         cy.url().should('include', '/mortgage/programs/secondary_free')
         cy.go('back')
