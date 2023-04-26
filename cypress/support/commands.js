@@ -9,6 +9,18 @@
 // ***********************************************
 //
 //
+Cypress.Commands.add('checklink', ($el, nscroll) => {
+    const href = $el.attr('href')
+    if (!href.includes('https://')) {
+        if (nscroll) {
+            cy.wrap($el).click({ scrollBehavior: false })
+        }
+        else {
+            cy.wrap($el).click()
+        }
+        cy.url().should('include', href)
+    }
+})
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
