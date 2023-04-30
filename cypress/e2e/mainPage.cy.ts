@@ -1,3 +1,5 @@
+import { includes } from "cypress/types/lodash"
+
 describe('mainPage', () => {
     it('testSection', () => {
         cy.visit('/krasnodar')
@@ -35,8 +37,8 @@ describe('mainPage', () => {
                     if (el.is(':visible')) {
                         cy.wrap(el).click('center')
                         cy.url().should('include', href)
+                        cy.go('back')
                     }
-                    cy.go('back')
                 }
             })
 
@@ -54,5 +56,24 @@ describe('mainPage', () => {
         cy.get('div.v-overlay__content').find('div.popupModal').find('a[href="/privacy"]').click()
         cy.url().should('include', '/privacy')
         cy.go('back')
+
+        cy.get('div.swiper').eq(0).scrollIntoView()
+        cy.contains("Свежие предложения").parent().siblings('div').as('ads')
+        cy.get('@ads').find('div.swiper-button-disabled').should('exist')
+        cy.get('@ads').find('div.swiper-button-next').click()
+        cy.get('@ads').find('div.swiper-button-disabled').should('not.exist')
+        cy.get('@ads').find('div.swiper-button-prev').should('exist')
+
+        cy.get('div.swiper').eq(1).scrollIntoView()
+        cy.contains("Топ риелторы вашего региона").parent().siblings('div').as('ads')
+        cy.get('@ads').find('div.swiper-button-disabled').should('exist')
+        cy.get('@ads').find('div.swiper-button-next').click()
+        cy.get('@ads').find('div.swiper-button-disabled').should('not.exist')
+        cy.get('@ads').find('div.swiper-button-prev').should('exist')
+        cy.get('a[href="/krasnodar/rieltors"]').eq(1).click()
+        cy.url().should('includes', '/rieltors')
+        cy.go('back')
+
+
     })
 })
