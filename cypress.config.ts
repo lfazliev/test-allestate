@@ -2,6 +2,6 @@ import { defineConfig } from 'cypress'
 
 export default defineConfig({
   e2e: {
-    baseUrl: 'http://allestate.pro',
+    baseUrl: 'https://dev.allestate.pro/',
   },
 })
